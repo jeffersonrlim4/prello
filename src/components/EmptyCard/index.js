@@ -3,17 +3,17 @@ import { Container, Label } from "./styles";
 import { useDrag, useDrop } from "react-dnd";
 import BoardContext from "../Board/context";
 
-export function Card({ data, index, listIndex }) {
+export function EmptyCard({ index, listIndex }) {
   const ref = useRef();
   const { move } = useContext(BoardContext)
-  const { id, content } = data
+  // const { id, content } = data
 
   const [{ isDragging }, dragRef] = useDrag({
     type: 'CARD',
     item: { 
-      id,
+      // id,
       index,
-      content,
+      // content,
       listIndex,
     },
     collect: monitor => ({
@@ -23,7 +23,7 @@ export function Card({ data, index, listIndex }) {
 
   const [, dropRef] = useDrop({
     accept: 'CARD',
-    hover(item, monitor) {
+    drop(item, _) {
       const draggedListIndex = item.listIndex;
       const targetListIndex = listIndex;
 
@@ -32,14 +32,14 @@ export function Card({ data, index, listIndex }) {
       
       if (draggedIndex === targetIndex && draggedListIndex === targetListIndex) return;
 
-      const targetSize = ref.current.getBoundingClientRect();
-      const targetCenter = (targetSize.bottom - targetSize.top) / 2;
+      // const targetSize = ref.current.getBoundingClientRect();
+      // const targetCenter = (targetSize.bottom - targetSize.top) / 2;
       
-      const draggedOffset = monitor.getClientOffset();
-      const draggedTop = draggedOffset.y - targetSize.top;
+      // const draggedOffset = monitor.getClientOffset();
+      // const draggedTop = draggedOffset.y - targetSize.top;
 
-      if (draggedIndex < targetIndex && draggedTop < targetCenter) return;
-      if (draggedIndex > targetIndex && draggedTop > targetCenter) return;
+      // if (draggedIndex < targetIndex && draggedTop < targetCenter) return;
+      // if (draggedIndex > targetIndex && draggedTop > targetCenter) return;
 
       move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
       item.index = targetIndex;
@@ -51,11 +51,11 @@ export function Card({ data, index, listIndex }) {
 
   return(
     <Container ref={ref} isDragging={isDragging}>
-      <header>
+      {/* <header>
         {data.labels.map((label, index) => <Label key={index} color={label}/>)}
       </header>
       <p>{data.content}</p>
-      {data.user && <img src={data.user} alt="Avatar de Jefferson Luís"/>}
+      {data.user && <img src={data.user} alt="Avatar de Jefferson Luís"/>} */}
     </Container>
   )
 }

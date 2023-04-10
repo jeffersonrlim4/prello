@@ -34,5 +34,13 @@ export const Container = styled.div`
 
   ul {
     margin-top: 30px;
+    min-height: 100vh;
+
+    /* div {
+      &:last-child {
+        background-color: red;
+        margin-bottom: 800px;
+      }
+    } */
   }
 `
